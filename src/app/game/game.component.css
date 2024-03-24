@@ -1,0 +1,39 @@
+.centerAll{
+    display: flex;
+    justify-content: center;
+}
+
+.board {
+    display: grid;
+    grid-gap: 10px;
+    width: 400px;
+    margin-bottom: 20px;
+} 
+
+.board div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    background-color: rgb(159, 164, 168);
+    font-size: 48px;
+    cursor: pointer;
+}
+
+.playerX {
+    color: blue; 
+}
+
+.playerO {
+    color: red; 
+}
+
+button {
+    font-size: 18px;
+    padding: 10px 20px;
+}
+.winner-message {
+    font-size: 24px;
+    margin-top: 20px;
+    color: green;
+}
