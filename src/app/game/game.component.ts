@@ -38,68 +38,26 @@ export class GameComponent {
     }
   }
 
+  
   checkWinner(): void {
     let winnerPositions: number[][] = [];
-
-    if (this.dimension === 3) {
-      winnerPositions = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-      ];
-    } else if (this.dimension === 4) {
-      winnerPositions = [
-        [0, 1, 2],
-        [1, 2, 3],
-        [4, 5, 6],
-        [5, 6, 7],
-        [8, 9, 10],
-        [9, 10, 11],
-        [12, 13, 14],
-        [13, 14, 15],
-        [0, 4, 8],
-        [1, 5, 9],
-        [2, 6, 10],
-        [3, 7, 11],
-        [4, 8, 12],
-        [5, 9, 13],
-        [6, 10, 14],
-        [7, 11, 15],
-        [0, 5, 10],
-        [3, 6, 9],
-        [5, 10, 15],
-        [2, 5, 8],
-      ];
-    } else if (this.dimension == 5) {
-      winnerPositions = [
-        [0, 1, 2, 3, 4],
-        [1, 2, 3, 4, 5],
-        [2, 3, 4, 5, 6],
-        [3, 4, 5, 6, 7],
-        [4, 5, 6, 7, 8],
-        [5, 6, 7, 8, 9],
-        [10, 11, 12, 13, 14],
-        [11, 12, 13, 14, 15],
-        [12, 13, 14, 15, 16],
-        [13, 14, 15, 16, 17],
-        [14, 15, 16, 17, 18],
-        [15, 16, 17, 18, 19],
-        [0, 5, 10, 15, 20],
-        [1, 6, 11, 16, 21],
-        [2, 7, 12, 17, 22],
-        [3, 8, 13, 18, 23],
-        [4, 9, 14, 19, 24],
-        [0, 6, 12, 18, 24],
-        [4, 8, 12, 16, 20],
-      ];
+  
+    // Controlla le righe
+    for (let i = 0; i <= this.dimension - 3; i++) {
+      for (let j = 0; j < this.dimension; j++) {
+        winnerPositions.push(Array.from({ length: 3 }, (_, index) => (i + index) * this.dimension + j));
+      }
     }
-
-    for (const [a, b, c] of winnerPositions) {
+  
+    // Controlla le colonne
+    for (let i = 0; i < this.dimension; i++) {
+      for (let j = 0; j <= this.dimension - 3; j++) {
+        winnerPositions.push(Array.from({ length: 3 }, (_, index) => i * this.dimension + j + index));
+      }
+    }
+    // Verifica se c'è un vincitore nelle posizioni calcolate
+    for (const positions of winnerPositions) {
+      const [a, b, c] = positions;
       if (
         this.cells[a] !== Player.None &&
         this.cells[a] === this.cells[b] &&
@@ -111,7 +69,8 @@ export class GameComponent {
       }
     }
   }
-
+  
+  
   makeBotMove(): void {
     const availableMoves: number[] = [];
     for (let i = 0; i < this.cells.length; i++) {
@@ -141,7 +100,7 @@ export class GameComponent {
       this.reset();
     }
   }
-  pareggio(): boolean { 
+  pareggio(): boolean {
     return !this.cells.includes(Player.None);
   }
 }
