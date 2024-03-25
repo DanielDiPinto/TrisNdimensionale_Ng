@@ -24,4 +24,8 @@
   <div *ngIf="winner" class="winner-message">
     Il giocatore <strong>{{ winner }}</strong> ha vinto!
   </div>
+  <div *ngIf="pareggio() && !winner" class="pareggio">
+    La partita è finita in pareggio
+  </div>
 </div>
+
